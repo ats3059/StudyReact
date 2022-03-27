@@ -12,7 +12,7 @@ function App() {
   const submit = (event) => {
     event.preventDefault();
     setTodos(curArr => [content,...curArr]);
-    console.log(todos);
+    setContent("");
   }
   return (
     <div className="App">
@@ -22,9 +22,14 @@ function App() {
           value={content}
           onChange={onChange}
         />
+        <button>submit</button>
       </form>
-      <button>submit</button>
-      <li>{todos.map((value)=>value)}</li>  
+      
+      {todos.map((value)=>
+        {
+          return <li>{value}</li> 
+        }
+      )}
     </div>
     
   );

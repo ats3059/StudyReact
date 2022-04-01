@@ -1,0 +1,27 @@
+const useInput = (first, validator) => {
+  const [value, setValue] = useState(first);
+  const onChange = (event) => {
+    const {
+      target: { value }
+    } = event;
+    let willUpdate = true;
+    if (typeof validator === "function") {
+      willUpdate = validator(value.length);
+    }
+    if(willUpdate) setValue(value);
+  };
+  return { value, onChange };
+};
+
+const App = () => {
+  const maxlen = (len) => (len <= 10 ? true : false);
+  const name = useInput("Mr.", maxlen);
+
+  return (
+    <div className="App">
+      <h1>Hello CodeSandbox</h1>
+      <h2>Start editing to see some magic happen!</h2>
+      <input placeholder="name" {...name} />
+    </div>
+  );
+};
